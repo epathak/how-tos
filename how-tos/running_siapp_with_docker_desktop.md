@@ -12,7 +12,7 @@ Go to **https://github.com/siemens/siapp-sdk > Download the Zip file of this rep
 _Note down the port number printed on second last line. Port number may change every time you run this command._
 6. These 2 windows will open up
 ![image](https://user-images.githubusercontent.com/31771892/145668053-710f415f-09f7-40a6-8c80-e5e7947e7cc9.png)
-7. Open a browser and type in search box localhost:port_number. This window should appear after you click on the **Events** button on the LHS pane. 
+7. Open a browser and type in search box localhost:port_number. This window should appear after you click on the **Events** button from the LHS pane. 
 ![image](https://user-images.githubusercontent.com/31771892/145668088-2f60829e-eba2-4a64-86f0-84ce245d16a5.png)
 
 
