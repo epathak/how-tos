@@ -63,6 +63,16 @@ NOTE: You will have to run the ubuntu in admin mode to run the sudo dockerd comm
 `sudo dockerd`<br>
 (should get: API listen on /var/run/docker.sock at the end)<br>
 
+## Issue you may face
+apt update and upgrade not working<br>
+`sudo nano /etc/resolv.conf`<br>
+Change nameserver to following line<br>
+`nameserver 8.8.8.8`<br>
+To make this change permanent create file **_/etc/wsl.conf_** and add following<br>
+`sudo nano /etc/resolv.conf`<br>
+`[network]`<br>
+`generateResolvConf = false`<br>
+
 
 
 
