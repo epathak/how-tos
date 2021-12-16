@@ -10,6 +10,7 @@ Add the Docker repository to APT sources:<br>
 This will also update our package database with the Docker packages from the newly added repo.<br>
 
 Make sure you are about to install from the Docker repo instead of the default Ubuntu repo:<br>
+NOTE: This command will not run on WSL2<br>
 `apt-cache policy docker-ce`<br>
 
 Docker should now be installed, the daemon started, and the process enabled to start on boot. Check that it’s running:<br>
