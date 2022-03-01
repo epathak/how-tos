@@ -1,7 +1,7 @@
 # Setup Docker on Windows Subsystem for Linux (WSL)
 ## Setting up WSL in power shell
 - To see a list of the Linux distributions <br>
-`wsl --list --o`<br>
+`wsl --list -o`<br>
 - Install Ubuntu-20.04 in wsl <br>
 `wsl --install -d Ubuntu-20.04` <br>
 - Download and install WSL2<br>
