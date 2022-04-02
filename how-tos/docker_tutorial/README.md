@@ -12,6 +12,8 @@ gcc hello_world.c -static -o hello_world
 ls -alogF
 ```
 ![image](https://user-images.githubusercontent.com/31771892/161368236-e993b0ad-eeb4-4a7f-b834-5f13cf7e7d1e.png)
+
+### Why Docker
 If you reboot your system these files will still be there. There is a possibility that you might delete some file or put files in wrong location.
 Imagine setting up a server, may be you have to install nginx, apache, python, php, .NET, and set it up. If you get it wrong you will have configuration issues. If you are dealing with lots of computers this becomes tedious task 
 
