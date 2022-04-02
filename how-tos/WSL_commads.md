@@ -31,3 +31,23 @@ sudo nano /etc/resolv.conf
 [network]
 generateResolvConf = false
 ```  
+
+## Removable Media and Network Drives
+- Mount removable media: (e.g. E:)
+```
+sudo mkdir /mnt/e
+```
+```
+sudo mount -t drvfs D: /mnt/e
+```
+- To safely unmount
+```
+sudo umount /mnt/e
+```
+- You can also mount network shares without smbfs:
+```
+sudo mount -t drvfs '\\server\share' /mnt/share
+```
+```
+sudo mount -t drvfs '\\Ingoigw111dat\ea\050_D\Knowledge_Sharing\Intern_work\FY20\2019-20_Madhav_Kshirsagar' /mnt/share
+```
