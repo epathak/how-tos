@@ -8,7 +8,7 @@
     ```
     ### Commands for different distributions
     Distro       | Windows CMD
-    ---          | ---
+    :---:        | ---
     Ubuntu       | ubuntu config –default-user root
     Ubuntu 20.04 |	ubuntu2004 config –default-user root
     Ubuntu 18.04 |	ubuntu1804 config –default-user root
