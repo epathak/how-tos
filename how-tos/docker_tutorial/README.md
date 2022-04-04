@@ -15,5 +15,8 @@ ls -alogF
 
 ### Why Docker
 If you reboot your system these files will still be there. There is a possibility that you might delete some file or put files in wrong location.
-Imagine setting up a server, may be you have to install nginx, apache, python, php, .NET, and set it up. If you get it wrong you will have configuration issues. If you are dealing with lots of computers this becomes tedious task 
+Imagine setting up a server, may be you have to install nginx, apache, python, php, .NET, and set it up. If you get it wrong you will have configuration issues. If you are dealing with lots of computers this becomes tedious task.<br/>
+To solve this issue, virtual machines were used. They run Guet OS on top of Host OS.<br/>
+![image](https://user-images.githubusercontent.com/31771892/161369122-64f1abd5-e3b6-4acb-a58d-aabee3b33eec.png)
+
 
