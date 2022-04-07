@@ -2,6 +2,7 @@
 ## Unable to build example projects in WSL
 [Issue](https://github.com/siemens/siapp-sdk/issues/5) was raised in [siapp-sdk](https://github.com/siemens/siapp-sdk) repo.
 The solution is add multi arch support to docker installation ([source](https://github.com/multiarch/qemu-user-static)).
+For a docker file that uses different architecture other than host may have to run to run cmd#3 before running the docker script. 
 ```
 uname -m
 ```
