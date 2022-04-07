@@ -15,3 +15,8 @@ docker build -t name_of_image:latest -f docker_file .
 ```
 docker run hello_world:latest
 ```
+- List of dokcer images running
+```
+docker ps
+```
+
