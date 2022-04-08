@@ -11,9 +11,9 @@ docker system prune
 ```
 docker build -t name_of_image:latest -f docker_file .
 ```
-- Run the dokcer image
+- Run the dokcer image with interactive terminal
 ```
-docker run hello_world:latest
+docker run -it name_of_image:latest
 ```
 - List of dokcer images running
 ```
