@@ -1,36 +1,9 @@
-# Setup Docker on Windows Subsystem for Linux (WSL)
-## Setting up WSL in power shell
-- To see a list of the Linux distributions 
-  ```
-  wsl --list -o
-  ```
-- Install Ubuntu-20.04 in wsl 
-  ```
-  wsl --install -d Ubuntu-20.04
-  ```
-- Download and install WSL2
-https://docs.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
-- Set WSL version to 2 
-  ```
-  wsl --set-version Ubuntu-20.04 2
-  ```
-- To check the WSL mode 
-  ```
-  wsl -l -v
-  ```
-- To update the WSL kernel 
-  ```
-  wsl --update
-  ``` 
-- For more info on WSL
-https://docs.microsoft.com/en-us/windows/wsl/install-win10
-
-## Setting up Docker in WSL
+# Setting up Docker in WSL
 - Configure sudo access for the non-root user:
   ```
   grep -E 'sudo|wheel' /etc/group
   ```
-  (should get: sudo:27:myusername else run: usermod -aG sudo myusername)
+  (should get: `sudo:27:myusername` else run: `usermod -aG sudo myusername`)
 - ```
   sudo grep -E '%sudo|%wheel' /etc/sudoers
   ```
