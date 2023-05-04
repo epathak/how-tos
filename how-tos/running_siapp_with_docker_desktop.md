@@ -1,4 +1,5 @@
 # Running SIAPP with docker desktop
+There is a new way to build the SIAPPs don't follow this... instead follow whats written [here](https://github.com/siemens/siapp-sdk)
 1. Download docker [destop](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=dd-smartbutton&utm_location=header)
 
    Install it with default configurations. Run the docker desktop.
