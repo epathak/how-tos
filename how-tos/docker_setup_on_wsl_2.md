@@ -1,4 +1,5 @@
 # Setting up Docker in WSL
+[source](https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9)<br>
 If you think setting up docker is a single cmd task then you are wrong!... I hope this works for you... : )
 - Configure sudo access for the non-root user:
   ```
@@ -62,7 +63,7 @@ If you think setting up docker is a single cmd task then you are wrong!... I hop
   source /etc/os-release
   ```
   ```
-  curl -fsSL https://download.docker.com/linux/${ID}/gpg | sudo apt-key add -
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo tee /etc/apt/keyrings/ubuntu_docker.gpg
   ```
 - (setup docker repo)
   ```
