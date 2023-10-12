@@ -13,15 +13,20 @@ For a docker file that uses different architecture other than host may have to r
     docker run --rm -t arm64v8/ubuntu uname -m
     ```
     ***Output:*** `standard_init_linux.go:228: exec user process caused: exec format error`
+    
     The following command allows you to `RUN` docker commands on cross arch platforms 
     ```
     docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
     ```
+    ![](images/image-8.png)
+- If **arm64v8/ubuntu** image does not exit then pull else show the `aarch64`
     ```
     docker run --rm -t arm64v8/ubuntu uname -m
     ```
     ***Output:*** `aarch64`
+- If **arm32v7/alpine** image does not exit then pull else show the `armv71`
     ```
     docker run --rm -t arm32v7/alpine uname -m
     ```
     ***Output:*** `armv71`
+    ![](images/image-9.png)

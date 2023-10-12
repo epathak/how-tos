@@ -1,5 +1,10 @@
 # Setting up Docker in WSL
 [source](https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9)<br>
+> **NOTE**:
+> 1. Following commands must be executed in ***admin mode power shell***
+> 2. Login to WSL from this admin mode power shell.
+> 3. For more info on [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+> 
 If you think setting up docker is a single cmd task then you are wrong!... I hope this works for you... : )
 - Configure sudo access for the non-root user:
   ```
@@ -19,11 +24,11 @@ If you think setting up docker is a single cmd task then you are wrong!... I hop
   ```
 
 ## Update/upgrade packages(test network)
-- should get: no errors
+- should get no errors in following command
   ```
   sudo apt update && sudo apt upgrade
   ```
-- **else** run below commands)
+- **else** run below commands
   ```
   echo -e "[network]\ngenerateResolvConf = false" | sudo tee -a /etc/wsl.conf
   ```
@@ -33,7 +38,7 @@ If you think setting up docker is a single cmd task then you are wrong!... I hop
   ```
   echo nameserver 1.1.1.1 | sudo tee /etc/resolv.conf
   ```
-- (try above command, if there are still errors, try the below commands)
+- if the errors persist then try the below commands
   ```
   netsh winsock reset
   ```
@@ -58,49 +63,63 @@ If you think setting up docker is a single cmd task then you are wrong!... I hop
   ```
   sudo apt install --no-install-recommends apt-transport-https ca-certificates curl gnupg2
   ```
+  ![](images/image-10.png)
 - (install dependencies)
   ```
   source /etc/os-release
   ```
+  ![](images/image-11.png)
   ```
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo tee /etc/apt/keyrings/ubuntu_docker.gpg
+  curl -fsSL https://download.docker.com/linux/${ID}/gpg | sudo tee /etc/apt/trusted.gpg.d/docker.asc
   ```
+  ![](images/image-13.png)
 - (setup docker repo)
   ```
   echo "deb [arch=amd64] https://download.docker.com/linux/${ID} ${VERSION_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/docker.list
   ```
+  ![](images/image-14.png)
 - Add repo to source and run update docker repo(cli-tools) 
   ```
   sudo apt update
   ```
+  ![](images/image-15.png)
 
 ##  Install Docker:
 - This is where you install docker
   ```
   sudo apt install docker-ce docker-ce-cli containerd.io
   ```
-- (install tools)
+  ![](images/image-16.png)
+- add user to docker group
   ```
   sudo usermod -aG docker $USER
   ```
+- logout 
   ```
   exit
   ```
+- login to wsl
   ```
   wsl
   ```
-- (add user to docker group, logout and login )
   ```
   groups
   ```
-  (lists groups, should list docker)
+  (This list should have **docker**)
+  ![](images/image-17.png)
 
 ## Run docker daemon:
-NOTE: You will have to run the ubuntu in admin mode to run the sudo dockerd command
+> NOTE: You will have to run the powershell in admin mode to run the sudo dockerd command
   ```
   sudo dockerd
   ```
-  (should get: API listen on /var/run/docker.sock at the end)
+  ![](images/image-18.png)
+  (should get: `API listen on /var/run/docker.sock` at the end)
+- To test the docker open another instance of WSL
+  ```
+  docker run hello-world
+  ```
+  ![](images/image-19.png)
 
 ## Issue you may face
 - apt update and upgrade not working

@@ -1,4 +1,8 @@
 # Setup Docker on Windows Subsystem for Linux (WSL)
+> **NOTE**:
+> 1. Following commands must be executed in ***admin mode power shell***
+> 2. For more info on [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+> 
 ## Setting up WSL in power shell
 - Download and install [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package)
 
@@ -6,23 +10,30 @@
   ```
   wsl --list -o
   ```
-- Install Ubuntu-20.04 in wsl 
+  ![](images/image.png)
+  
+- Install latest Ubuntu in wsl 
   ```
-  wsl --install -d Ubuntu-20.04
+  wsl --install -d Ubuntu
   ```
+  ![](images/image-1.png)
+  ![](images/image-2.png)
+  ![](images/image-3.png)
+
 - Set WSL version to 2 
   ```
-  wsl --set-version Ubuntu-20.04 2
+  wsl --set-version Ubuntu 2
   ```
+  ![](images/image-4.png)
 - To check the WSL mode 
   ```
   wsl -l -v
   ```
+  ![](images/image-5.png)
 - To update the WSL kernel 
   ```
   wsl --update
-  ``` 
-- For more info on [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+  ```
 
 ## On Windows
 - Accessing wsl files in Windows Explorer. Type the following after starting wsl in File Explorer Address bar
@@ -41,7 +52,7 @@ cd /mnt/d 		                              | D drive
 
 
 ## Unable to access internet through WSL
-- If ping google.com doesn't work try following. Getting sudo apt-get update and upgrade working.
+- If ping google.com doesn't work try following. Getting `sudo apt update && apt upgrade` working.
 ```
 sudo nano /etc/resolv.conf
 ```
@@ -49,6 +60,7 @@ sudo nano /etc/resolv.conf
 ```
 nameserver 8.8.8.8
 ```
+![](images/image-6.png)
 - To make this change permanent create file _**/etc/wsl.conf**_
 ```
 sudo nano /etc/resolv.conf
@@ -57,7 +69,8 @@ sudo nano /etc/resolv.conf
 ```
 [network]
 generateResolvConf = false
-```  
+```
+![](images/image-7.png)  
 
 ## Removable Media and Network Drives
 - Mount removable media: (e.g. E:)
