@@ -114,7 +114,7 @@ If you think setting up docker is a single cmd task then you are wrong!... I hop
   sudo dockerd
   ```
   ![](images/image-18.png)
-  (should get: `API listen on /var/run/docker.sock` at the end)
+  - (should get: `API listen on /var/run/docker.sock` at the end)
 - To test the docker open another instance of WSL
   ```
   docker run hello-world
