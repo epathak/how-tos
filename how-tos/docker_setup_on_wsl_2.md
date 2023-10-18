@@ -10,13 +10,13 @@ If you think setting up docker is a single cmd task then you are wrong!... I hop
   ```
   grep -E 'sudo|wheel' /etc/group
   ```
-- (should get: `sudo:27:myusername` el ose run: `usermod -aG sudo myusername`)
+- (should get: `sudo:27:myusername` else run: `usermod -aG sudo myusername`)
   ```
   sudo grep -E '%sudo|%wheel' /etc/sudoers
   ```
 - should get: %wheel ALL=(ALL) ALL else edit and uncomment
   ```
-  su myusername
+  su $USER
   ```
 - should get: no errors
   ```
@@ -94,7 +94,7 @@ If you think setting up docker is a single cmd task then you are wrong!... I hop
   ```
   sudo usermod -aG docker $USER
   ```
-- logout 
+- logout of WSL (You may have to execute twice)
   ```
   exit
   ```
@@ -115,6 +115,10 @@ If you think setting up docker is a single cmd task then you are wrong!... I hop
   ```
   ![](images/image-18.png)
   - (should get: `API listen on /var/run/docker.sock` at the end)
+  - If you see any error run this command and rerun the above command
+  ```
+  ps axf | grep docker | grep -v grep | awk '{print "kill -9 " $1}' | sudo sh
+  ```
 - To test the docker open another instance of WSL
   ```
   docker run hello-world

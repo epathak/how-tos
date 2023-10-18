@@ -63,7 +63,7 @@ nameserver 8.8.8.8
 ![](images/image-6.png)
 - To make this change permanent create file _**/etc/wsl.conf**_
 ```
-sudo nano /etc/resolv.conf
+sudo nano /etc/wsl.conf
 ```
 - Add following to the file
 ```
