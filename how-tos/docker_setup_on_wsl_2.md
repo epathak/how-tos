@@ -1,80 +1,186 @@
-# Setup Docker on Windows Subsystem for Linux (WSL)
-## Setting up WSL in power shell
-- To see a list of the Linux distributions <br>
-`wsl --list -o`<br>
-- Install Ubuntu-20.04 in wsl <br>
-`wsl --install -d Ubuntu-20.04` <br>
-- Download and install WSL2<br>
-https://docs.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package<br>
-- Set WSL version to 2 <br>
-`wsl --set-version Ubuntu-20.04 2` <br>
-- To check the WSL mode <br>
-`wsl -l -v`<br>
-- To update the WSL kernel <br>
-      `wsl --update` <br>
-- For more info on WSL<br>
-https://docs.microsoft.com/en-us/windows/wsl/install-win10<br>
-
-## Setting up Docker in WSL
-- Configure sudo access for the non-root user:<br>
-`grep -E 'sudo|wheel' /etc/group`<br>
-(should get: sudo:27:myusername else run: usermod -aG sudo myusername)<br>
-- `sudo grep -E '%sudo|%wheel' /etc/sudoers`<br>
-(should get: %wheel ALL=(ALL) ALL else edit and uncomment)<br>
-`su myusername`<br>
-`sudo -v`<br>
-(should get: no errors)<br>
+# Setting up Docker in WSL
+[source](https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9)<br>
+> **NOTE**:
+> 1. Following commands must be executed in ***admin mode power shell***
+> 2. Login to WSL from this admin mode power shell.
+> 3. For more info on [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+> 
+If you think setting up docker is a single cmd task then you are wrong!... I hope this works for you... : )
+- Configure sudo access for the non-root user:
+  ```
+  grep -E 'sudo|wheel' /etc/group
+  ```
+- (should get: `sudo:27:myusername` else run: `usermod -aG sudo myusername`)
+  ```
+  sudo grep -E '%sudo|%wheel' /etc/sudoers
+  ```
+- should get: %wheel ALL=(ALL) ALL else edit and uncomment
+  ```
+  su $USER
+  ```
+- should get: no errors
+  ```
+  sudo -v
+  ```
 
 ## Update/upgrade packages(test network)
-- `sudo apt update && sudo apt upgrade`<br>
-(should get: no errors, else run below commands)<br>
-- `echo -e "[network]\ngenerateResolvConf = false" | sudo tee -a /etc/wsl.conf`<br>
-- `sudo unlink /etc/resolv.conf`<br>
-- `echo nameserver 1.1.1.1 | sudo tee /etc/resolv.conf`<br>
-(try above command, if still errors, try below commands)<br>
-- `netsh winsock reset`<br>
-- `netsh int ip reset all`<br>
-- `netsh winhttp reset proxy`<br>
-- `ipconfig /flushdns`<br>
-- `reboot`<br>
+- should get no errors in following command
+  ```
+  sudo apt update && sudo apt upgrade
+  ```
+
+- **else** run below commands
+  ```
+  echo -e "[network]\ngenerateResolvConf = false" | sudo tee -a /etc/wsl.conf
+  ```
+  ```
+  sudo unlink /etc/resolv.conf
+  ```
+  ```
+  echo nameserver 1.1.1.1 | sudo tee /etc/resolv.conf
+  ```
+
+- if the errors persist then try the below commands
+  ```
+  netsh winsock reset
+  ```
+  ```
+  netsh int ip reset all
+  ```
+  ```
+  netsh winhttp reset proxy
+  ```
+  ```
+  ipconfig /flushdns
+  ```
+  ```
+  reboot
+  ```
 
 ## Setup docker repo(cli-tools)
-- `sudo apt remove docker docker-engine docker.io containerd runc`<br>
-(remove residue)<br>
-- `sudo apt install --no-install-recommends apt-transport-https ca-certificates curl gnupg2`<br>
-(install dependencies)<br>
-- `source /etc/os-release`<br>
-- `curl -fsSL https://download.docker.com/linux/${ID}/gpg | sudo apt-key add -`<br>
-(setup docker repo)<br>
-- `echo "deb [arch=amd64] https://download.docker.com/linux/${ID} ${VERSION_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/docker.list`<br>
-- `sudo apt update`<br>
-(Add repo to source and run update)ocker repo(cli-tools)<br>
+- (remove residue)
+  ```
+  sudo apt remove docker docker-engine docker.io containerd runc
+  ```
+  ```
+  sudo apt install --no-install-recommends apt-transport-https ca-certificates curl gnupg2
+  ```
+  ![](images/image-10.png)
+
+- (install dependencies)
+  ```
+  source /etc/os-release
+  ```
+  ![](images/image-11.png)
+  ```
+  curl -fsSL https://download.docker.com/linux/${ID}/gpg | sudo tee /etc/apt/trusted.gpg.d/docker.asc
+  ```
+  ![](images/image-13.png)
+  
+- (setup docker repo)
+  ```
+  echo "deb [arch=amd64] https://download.docker.com/linux/${ID} ${VERSION_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/docker.list
+  ```
+  ![](images/image-14.png)
+
+- Add repo to source and run update docker repo(cli-tools) 
+  ```
+  sudo apt update
+  ```
+  ![](images/image-15.png)
 
 ##  Install Docker:
-- `sudo apt install docker-ce docker-ce-cli containerd.io`<br>
-(install tools)<br>
-- `sudo usermod -aG docker $USER`<br>
-- `exit`<br>
-- `wsl`<br>
-(add user to docker group, logout and login )<br>
-- `groups`<br>
-(lists groups, should list docker)<br>
+- This is where you install docker
+  ```
+  sudo apt install docker-ce docker-ce-cli containerd.io
+  ```
+  ![](images/image-16.png)
+
+- add user to docker group
+  ```
+  sudo usermod -aG docker $USER
+  ```
+
+- logout of WSL (You may have to execute twice)
+  ```
+  exit
+  ```
+
+- login to wsl
+  ```
+  wsl
+  ```
+  ```
+  groups
+  ```
+  (This list should have **docker**)
+  ![](images/image-17.png)
 
 ## Run docker daemon:
-NOTE: You will have to run the ubuntu in admin mode to run the sudo dockerd command<br>
-- `sudo dockerd`<br>
-(should get: API listen on /var/run/docker.sock at the end)<br>
+> NOTE: You will have to run the powershell in admin mode to run the sudo dockerd command
+- First check if the service is running int he background
+  ```
+  ps axf | grep docker
+  ```
+  ![alt text](images/image-27.png)
+
+- If the service is not running in the background then run...
+  ```
+  sudo dockerd
+  ```
+  ![](images/image-18.png)
+  - (should get: `API listen on /var/run/docker.sock` at the end)
+  
+- Alternatively you can start the daemon in the background on subsequent logins
+  ```
+  service docker start
+  ```
+  ![](images/image-25.png)
+
+- Alternatively you can add this command from `$HOME` directory
+  ```
+  cd ~
+  sudo nano -l .profile
+  sudo service docker status || sudo service docker start
+  ```
+  ![alt text](images/image-28.png)
+
+- When you close the WSL and restart you should see
+  ![alt text](images/image-29.png)
+
+- If you see any error run this command and rerun the above command
+  ```
+  ps axf | grep docker | grep -v grep | awk '{print "kill -9 " $1}' | sudo sh
+  ```
+
+- To test the docker open another instance of WSL
+  ```
+  docker run hello-world
+  ```
+  ![](images/image-19.png)
+
+- You can check the list of docker images
+  ```
+  docker images
+  ```
+  ![alt text](images/image-26.png)
 
 ## Issue you may face
-- apt update and upgrade not working<br>
-`sudo nano /etc/resolv.conf`<br>
-- Change nameserver to following line<br>
-`nameserver 8.8.8.8`<br>
-- To make this change permanent create file **_/etc/wsl.conf_** and add following<br>
-`sudo nano /etc/resolv.conf`<br>
-`[network]`<br>
-`generateResolvConf = false`<br>
+- apt update and upgrade not working
+  ```
+  sudo nano /etc/resolv.conf
+  ```
+  
+- Change nameserver to following line
+  ```
+  nameserver 8.8.8.8
+  ```
 
-
-
-
+- To make this change permanent create file **_/etc/wsl.conf_** and add following
+  ```
+  sudo nano /etc/resolv.conf
+  ```
+  ```
+  [network]
+  generateResolvConf = false
+  ```
